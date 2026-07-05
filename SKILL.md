@@ -72,10 +72,26 @@ node scripts/render.mjs decks/<案件名> --pdf    # PNG + 結合PDF
 - 問題があれば直して STEP 4 からやり直し
 - 完了後、ユーザーにPNGを見せて確認を取る
 
-## 画像を使いたい場合
-- ユーザー提供画像: `media` レイアウトの `<img>` に入れる（`decks/<案件名>/assets/` に置く）
-- AI生成画像: ユーザーがGemini APIキー等を持っていれば生成して差し込める（任意機能）。
-  なくても全テーマ成立するデザインになっている
+## 画像・イラストを使う（Phase 3）
+
+### AI写真生成（Gemini・1枚約6円/$0.039）
+```bash
+# 初回のみ: セットアップ（ブラウザでキー発行ページが開く → キーを渡して検証・保存）
+node scripts/setup-gemini.mjs
+node scripts/setup-gemini.mjs <発行したキー>
+
+# 生成（--style はテーマ名。テーマに合う画風が自動で乗る）
+node scripts/genimg.mjs "<日本語で場面を描写>" decks/<案件>/assets/cover.png --style warm --ar 16:9
+```
+- キー未設定でユーザーが写真を要望したら: `node scripts/setup-gemini.mjs` を実行し、表示されるガイドに沿って**ユーザーに発行を案内**する（キーをチャットに貼らせず `! node scripts/setup-gemini.mjs キー` の実行を促す）
+- 生成した写真は photo-hero の背景・media・polaroid・breakout（透過が要る場合は「background transparent, isolated on white」を指示）に使う
+- 人物の顔アップは崩れやすい。風景・物・後ろ姿・手元が安定
+
+### イラスト（無料・無限）
+`core/illustrations.md` に線画アイコン24種＋スポットイラスト6種。badgeやmedia-boxにコピペで使える
+
+### 立体感・斜め文字
+`.depth-1/2` `.tilt-l/r` `.polaroid`、photo-hero（斜め帯タイトル）、breakout（円から飛び出す）、kinetic（斜め文字ステートメント）— layouts.md Phase 3セクション参照
 
 ## 別サイズ（SNS正方形・縦型）
 基本は16:9固定。他サイズが必要なら `.slide` の width/height と render.mjs の viewport を

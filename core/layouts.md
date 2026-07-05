@@ -382,6 +382,95 @@
 
 ---
 
+# ★★ Phase 3 — 写真・立体・斜め文字
+
+## 立体感ユーティリティ（どの要素にも足せる）
+
+```html
+<div class="card depth-2 tilt-l">…</div>   <!-- 多層シャドウ + 左傾き -->
+```
+- `.depth-1` / `.depth-2` — 浮遊感のある多層シャドウ（2が強い）
+- `.tilt-l` / `.tilt-r` — わずかな傾き（-2deg / +1.6deg）
+- `.polaroid` — 写真をポラロイド風に（`<div class="polaroid tilt-r depth-2"><img …><div class="cap">キャプション</div></div>`）
+- 使いすぎ注意: 傾き要素は1枚に2個まで
+
+## 18. photo-hero — 全面写真の表紙（斜め帯タイトル）
+
+AI生成写真（scripts/genimg.mjs）または手持ち写真を全面に。写真がまだ無ければ placeholder で成立。
+
+```html
+<div class="slide l-photo">
+  <div class="photo-bg placeholder"></div>
+  <!-- 写真があるとき: <div class="photo-bg"><img src="assets/cover.png"></div> -->
+  <div class="photo-scrim"></div>
+  <div class="photo-body">
+    <div class="photo-eyebrow">英語アイキャッチ ── 年など</div>
+    <div class="band-title">
+      <span class="band dark">タイトル1行目（12字以内）</span>
+      <span class="band">2行目（アクセント色の帯）</span>
+      <!-- .band.alt = 白帯。帯は2〜3本まで -->
+    </div>
+    <p class="photo-sub">サブコピー。2行以内。</p>
+  </div>
+  ...brand/pageno...
+</div>
+```
+
+## 19. breakout — 円から飛び出すビジュアル
+
+写真（背景透過PNG推奨）・絵文字・スポットイラストが円形フレームを突き破る立体レイアウト。
+
+```html
+<div class="slide">
+  <div class="deco layer-texture"></div>
+  <div class="deco ghost" style="left:-20px; bottom:-70px;">GO!</div>
+  <div class="breakout-grid">
+    <div class="story">…（hero-statと同じ story ブロック）…</div>
+    <div class="bo-stage">
+      <div class="bo-circle"></div>
+      <div class="bo-emoji">🚀</div>
+      <!-- 写真なら: <img class="bo-img" src="assets/person.png">（透過PNG・縦長） -->
+      <div class="chip bo-float depth-2 tilt-l" style="right:-10px; top:90px; width:300px;">
+        <div class="ico">📈</div>
+        <div><div class="v">8.4<small>倍</small></div><div class="k">指標名</div></div>
+      </div>
+      <div class="chip bo-float depth-2 tilt-r" style="left:-34px; bottom:60px; width:300px;">…</div>
+    </div>
+  </div>
+  ...brand/pageno...
+</div>
+```
+
+## 20. kinetic — 斜め文字ステートメント（雑誌風）
+
+一番強いメッセージを1枚使って叫ぶ。デッキ中盤の「間」や章の締めに。
+
+```html
+<div class="slide">
+  <div class="deco layer-texture"></div>
+  <div class="kinetic">
+    <div class="k-stack">
+      <div class="k-tag">英語タグ</div>
+      <div class="k-line k-outline" style="font-size:120px;">アウトラインの行、</div>
+      <div class="k-line k-fill" style="font-size:108px; margin-left:70px;">塗り帯の行。</div>
+      <div class="k-line k-accent" style="font-size:88px; margin-left:170px;">アクセント帯の行。</div>
+    </div>
+  </div>
+  <div class="k-foot">── 補足の一文（任意）</div>
+  ...brand/pageno...
+</div>
+```
+- 行は3〜4本。font-size と margin-left を階段状にずらす（ジャンプ率）
+- k-outline / k-fill / k-accent / 無印(k-line) を混ぜる。同種を連続させない
+
+## 写真・イラストの入手方法
+
+1. **AI生成写真**: `node scripts/genimg.mjs "プロンプト" decks/<案件>/assets/xxx.png --style <テーマ名>`（初回は `node scripts/setup-gemini.mjs` でキー設定）
+2. **イラスト**: `core/illustrations.md` の線画アイコン24種＋スポットイラスト6種（コピペで使える・無料）
+3. **ユーザー提供写真**: `decks/<案件>/assets/` に置いて `<img>` 参照
+
+---
+
 ## 台本→レイアウト対応の目安
 
 | 台本の内容 | 使うレイアウト |

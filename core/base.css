@@ -571,6 +571,124 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 .mx-axis.right  { right: -84px; top: 50%; transform: translate(0%, -50%) rotate(90deg); color: var(--accent); }
 
 /* =====================================================================
+   ★ 立体感ユーティリティ（Phase 3）— どの要素にも足せる
+   ===================================================================== */
+/* 多層シャドウ: 数字が大きいほど浮く */
+.depth-1 { box-shadow: 0 2px 6px rgba(10, 12, 24, 0.08), 0 10px 24px rgba(10, 12, 24, 0.10); }
+.depth-2 { box-shadow: 0 4px 10px rgba(10, 12, 24, 0.10), 0 18px 40px rgba(10, 12, 24, 0.14), 0 44px 90px rgba(10, 12, 24, 0.12); }
+/* 傾き: カード・画像・チップに */
+.tilt-l  { transform: rotate(-2deg); }
+.tilt-r  { transform: rotate(1.6deg); }
+/* ポラロイド写真枠（画像を写真プリント風に） */
+.polaroid {
+  background: #fff; padding: 20px 20px 58px; border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 10px rgba(10,12,24,0.10), 0 18px 40px rgba(10,12,24,0.16);
+  display: inline-block; position: relative;
+}
+.polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.polaroid .cap {
+  position: absolute; left: 0; right: 0; bottom: 14px; text-align: center;
+  font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #5A5A66;
+}
+
+/* =====================================================================
+   18. photo-hero — 全面写真の表紙（AI生成写真 or プレースホルダー）
+   ===================================================================== */
+.l-photo { color: #fff; }
+.photo-bg { position: absolute; inset: 0; }
+.photo-bg img { width: 100%; height: 100%; object-fit: cover; }
+/* 写真がまだ無いときのプレースホルダー（テーマ色のムード背景） */
+.photo-bg.placeholder {
+  background:
+    radial-gradient(1100px 700px at 78% 24%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 70%),
+    radial-gradient(900px 700px at 18% 82%, color-mix(in srgb, var(--accent-2, var(--accent)) 45%, transparent), transparent 72%),
+    linear-gradient(140deg, #14161F, #232633);
+}
+.photo-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(200deg, rgba(6, 8, 14, 0) 34%, rgba(6, 8, 14, 0.62) 78%),
+    linear-gradient(90deg, rgba(6, 8, 14, 0.42), transparent 58%);
+}
+.photo-body { position: absolute; left: var(--pad-x); bottom: 150px; right: 260px; }
+.photo-eyebrow {
+  font-family: var(--font-display);
+  font-size: 26px; font-weight: 800; letter-spacing: 0.26em;
+  color: rgba(255, 255, 255, 0.92); margin-bottom: 40px;
+}
+/* 斜めの帯タイトル: 1行 = 1つの .band。交互に色を変えると雑誌風 */
+.band-title { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.band {
+  display: inline-block; transform: rotate(-2deg);
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 84px; line-height: 1.12; letter-spacing: 0.01em;
+  padding: 8px 36px 14px;
+  background: var(--accent); color: var(--on-accent, #fff);
+  box-shadow: 0 14px 34px rgba(6, 8, 14, 0.35);
+}
+.band:nth-child(2) { transform: rotate(-2deg) translateX(42px); }
+.band:nth-child(3) { transform: rotate(-2deg) translateX(96px); }
+.band.alt  { background: #fff; color: #16181F; }
+.band.dark { background: #16181F; color: #fff; }
+.photo-sub {
+  margin-top: 42px; font-size: 29px; line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92); max-width: 960px;
+  text-shadow: 0 2px 14px rgba(6, 8, 14, 0.5);
+}
+.l-photo .brand, .l-photo .pageno { color: rgba(255, 255, 255, 0.85); }
+.l-photo .brand .mark { background: #fff; }
+
+/* =====================================================================
+   19. breakout — 円形フレームから飛び出すビジュアル
+   ===================================================================== */
+.breakout-grid {
+  position: absolute; left: var(--pad-x); right: 100px; top: 140px; bottom: 130px;
+  display: grid; grid-template-columns: 1fr 720px; gap: 72px; align-items: center;
+}
+.bo-stage { position: relative; height: 100%; }
+.bo-circle {
+  position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 16%, var(--bg-soft));
+  border: var(--card-border);
+}
+/* 円より背が高い画像を重ねる → 頭が円を突き破って立体に見える */
+.bo-img {
+  position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%);
+  width: 560px; height: 740px; object-fit: contain; object-position: bottom;
+  filter: drop-shadow(0 36px 44px rgba(10, 12, 24, 0.30));
+}
+/* 写真がないときは絵文字/イラストでも成立 */
+.bo-emoji {
+  position: absolute; left: 50%; bottom: 230px; transform: translateX(-50%);
+  font-size: 400px; line-height: 1;
+  filter: drop-shadow(0 36px 44px rgba(10, 12, 24, 0.28));
+}
+/* 浮遊チップ: .chip に .bo-float を足し、inline style で配置 */
+.bo-float { position: absolute; z-index: 2; }
+
+/* =====================================================================
+   20. kinetic — 斜め文字のステートメント（雑誌の見開き風）
+   ===================================================================== */
+.kinetic { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.k-stack { transform: rotate(-6deg); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.k-line {
+  font-family: var(--font-display); font-weight: 900; line-height: 1.06;
+  font-size: 96px; letter-spacing: 0.01em; color: var(--ink);
+}
+.k-line.k-fill   { background: var(--ink); color: var(--bg); padding: 6px 40px 16px; box-shadow: 10px 14px 0 color-mix(in srgb, var(--ink) 18%, transparent); }
+.k-line.k-accent { background: var(--accent); color: var(--on-accent, #fff); padding: 6px 40px 16px; box-shadow: 10px 14px 0 color-mix(in srgb, var(--ink) 18%, transparent); }
+.k-line.k-outline { color: transparent; -webkit-text-stroke: 4px var(--ink); }
+.k-tag {
+  font-family: var(--font-display); font-size: 26px; font-weight: 800; letter-spacing: 0.18em;
+  color: var(--accent); margin-bottom: 6px;
+}
+.k-foot {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 130px;
+  font-size: 27px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em;
+}
+
+/* =====================================================================
    17. bars — 横棒比較（2〜5本、--w:% で長さ指定）
    ===================================================================== */
 .bars {
