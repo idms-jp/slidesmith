@@ -14,6 +14,7 @@ import { mkdir, writeFile, chmod } from "node:fs/promises";
 import { homedir, platform } from "node:os";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
+import { createInterface } from "node:readline";
 
 const API_BASE = "https://generativelanguage.googleapis.com/v1beta";
 const AISTUDIO_URL = "https://aistudio.google.com/apikey";
@@ -48,9 +49,8 @@ function showGuide() {
    （無料枠あり。クレジットカード登録なしでも発行できます）
 
 3. 発行されたキー（AIza... で始まる文字列）をコピーして、
-   次のコマンドを実行してください:
-
-   node scripts/setup-gemini.mjs あなたのキー
+   このあと表示される入力欄に貼り付けて Enter
+   （入力は画面に表示されず、コマンド履歴にも残りません）
 
 キーは ~/.config/slidesmith/credentials.json に保存され、
 genimg.mjs（画像生成CLI）が自動で読み込みます。
@@ -116,6 +116,24 @@ async function validateKey(key) {
   process.exit(1);
 }
 
+/** 対話式の非表示入力（打った文字を画面に出さない = シェル履歴にも残らない） */
+function promptHidden(question) {
+  return new Promise((resolve) => {
+    const rl = createInterface({ input: process.stdin, output: process.stdout, terminal: true });
+    rl.question(question, (answer) => {
+      rl.close();
+      process.stdout.write("\n");
+      resolve(answer.trim());
+    });
+    // 入力内容のエコーバックを * に置き換える
+    rl._writeToOutput = (str) => {
+      if (str.startsWith(question)) rl.output.write(question);
+      else if (str.includes("\n")) rl.output.write("");
+      else rl.output.write("*");
+    };
+  });
+}
+
 async function saveKey(key) {
   await mkdir(CONFIG_DIR, { recursive: true, mode: 0o700 });
   await writeFile(
@@ -134,7 +152,13 @@ async function main() {
     return;
   }
 
-  const key = args[0]?.trim() || process.env.GEMINI_API_KEY?.trim();
+  let key = args[0]?.trim() || process.env.GEMINI_API_KEY?.trim();
+
+  if (key && args[0]) {
+    console.log("⚠ 注意: 引数でキーを渡すとシェル履歴（~/.zsh_history等）に残ります。");
+    console.log("  次回からは引数なしで実行し、非表示の入力欄に貼り付ける方式を推奨します。");
+    console.log("");
+  }
 
   if (!key) {
     showGuide();
@@ -144,7 +168,17 @@ async function main() {
     } else {
       console.log(`→ ブラウザを自動で開けませんでした。上記URLを手動で開いてください: ${AISTUDIO_URL}`);
     }
-    return;
+    if (!process.stdin.isTTY) {
+      // 対話できない環境（パイプ実行等）では入力待ちにせず案内のみで終了
+      console.log("→ キー発行後、ターミナルでもう一度このコマンドを実行してください。");
+      return;
+    }
+    console.log("");
+    key = await promptHidden("APIキーを貼り付けて Enter（画面には表示されません）: ");
+    if (!key) {
+      console.log("入力が空だったため終了します。発行後にもう一度実行してください。");
+      return;
+    }
   }
 
   console.log("APIキーを検証しています…");

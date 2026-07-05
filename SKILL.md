@@ -76,14 +76,14 @@ node scripts/render.mjs decks/<案件名> --pdf    # PNG + 結合PDF
 
 ### AI写真生成（Gemini・1枚約6円/$0.039）
 ```bash
-# 初回のみ: セットアップ（ブラウザでキー発行ページが開く → キーを渡して検証・保存）
+# 初回のみ: セットアップ（ブラウザでキー発行ページが開く → 非表示の入力欄にキーを貼り付け）
 node scripts/setup-gemini.mjs
-node scripts/setup-gemini.mjs <発行したキー>
+# ↑ 入力欄は画面にもシェル履歴にも残らない安全方式。引数渡しは履歴に残るため非推奨
 
 # 生成（--style はテーマ名。テーマに合う画風が自動で乗る）
 node scripts/genimg.mjs "<日本語で場面を描写>" decks/<案件>/assets/cover.png --style warm --ar 16:9
 ```
-- キー未設定でユーザーが写真を要望したら: `node scripts/setup-gemini.mjs` を実行し、表示されるガイドに沿って**ユーザーに発行を案内**する（キーをチャットに貼らせず `! node scripts/setup-gemini.mjs キー` の実行を促す）
+- キー未設定でユーザーが写真を要望したら: `node scripts/setup-gemini.mjs` を実行し、表示されるガイドに沿って**ユーザーに発行を案内**する。キーは**チャットに貼らせない**——ユーザー自身のターミナル（Claude Codeなら `!` プレフィックス）で `node scripts/setup-gemini.mjs` を実行してもらい、非表示プロンプトに貼り付けさせる
 - 生成した写真は photo-hero の背景・media・polaroid・breakout（透過が要る場合は「background transparent, isolated on white」を指示）に使う
 - 人物の顔アップは崩れやすい。風景・物・後ろ姿・手元が安定
 
