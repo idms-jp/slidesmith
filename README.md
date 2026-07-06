@@ -69,7 +69,7 @@
 開いたら、下の1行を**まるごとコピーして貼り付けて Enter**：
 
 ```bash
-git clone https://github.com/Icchaso/slidesmith.git ~/.claude/skills/slidesmith && cd ~/.claude/skills/slidesmith && npm install
+git clone https://github.com/idms-jp/slidesmith.git ~/.claude/skills/slidesmith && cd ~/.claude/skills/slidesmith && npm install
 ```
 
 （Windowsの場合は保存先を `%USERPROFILE%\.claude\skills\slidesmith` に読み替えてください）
