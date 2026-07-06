@@ -51,7 +51,7 @@
 
 ![icons](docs/gallery/icons.png)
 
-`examples/` に8テーマ×サンプルデッキ（計47枚）入り。クローンして自分でレンダリングできます。
+`examples/` に11テーマ×サンプルデッキ（計62枚）入り。クローンして自分でレンダリングできます。
 
 ## 必要なもの
 
@@ -90,7 +90,7 @@ node scripts/render.mjs examples/pop-sns --pdf    # PDF も生成
 
 ```
 ┌─────────────────────────────────────────────┐
-│  core/base.css   … 12レイアウトの骨格（固定）│
+│  core/base.css   … 20レイアウトの骨格（固定）│
 │  themes/*.css    … 色・フォント・装飾（固定）│
 │  ← AI はここに一切触らない                    │
 ├─────────────────────────────────────────────┤
@@ -113,17 +113,10 @@ slidesmith/
 ├── SKILL.md               # Claude Code が読むスキル定義
 ├── core/
 │   ├── base.css           # 全レイアウトの骨格（編集禁止）
-│   └── layouts.md         # レイアウトカタログ17種＋プロ級の鉄則
-├── themes/          # 11テーマ + THEME_GUIDE.md
+│   └── layouts.md         # レイアウトカタログ20種＋プロ級の鉄則
+├── themes/
 │   ├── THEME_GUIDE.md     # 新テーマ自作レシピ
-│   ├── corporate.css      # ビジネス・信頼感
-│   ├── pop.css            # ポップ・ビビッド
-│   ├── elegant.css        # 高級・和モダン
-│   ├── minimal.css        # ミニマル・モノクロ
-│   ├── tech.css           # テック・ネオン
-│   ├── warm.css           # ナチュラル・オーガニック
-│   ├── feminine.css       # フェミニン
-│   └── retro.css          # レトロポップ
+│   └── *.css              # 11テーマ（corporate/pop/elegant/minimal/tech/warm/feminine/retro/fresh/dynamic/duotone）
 ├── scripts/
 │   └── render.mjs         # レンダラー + 自動QC
 ├── examples/              # テーマ別サンプルデッキ
