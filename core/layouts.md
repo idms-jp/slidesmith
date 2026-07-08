@@ -84,7 +84,7 @@
     <div class="card">
       <div class="badge">1</div>  <!-- 絵文字なら class="badge icon" -->
       <h3>カード見出し（2行まで）</h3>
-      <p>本文。70字以内。</p>
+      <p>本文。60字以内。</p>
     </div>
     <!-- --cols と同数 -->
   </div>
@@ -101,9 +101,9 @@
     <li>
       <div class="badge">1</div>
       <h3>行タイトル（15字以内）</h3>
-      <p>説明。55字以内。</p>
+      <p>説明。48字以内。</p>
     </li>
-    <!-- 3〜4行。4行なら説明は45字以内 -->
+    <!-- 3〜4行。4行なら説明は38字以内 -->
   </ul>
   ...brand/pageno...
 </div>
@@ -117,7 +117,7 @@
   <div class="compare">
     <div class="panel">
       <div class="panel-head">😢 悪い側の名前</div>
-      <ul><li>項目（25字以内）</li><!-- 3〜5個 --></ul>
+      <ul><li>項目（22字以内）</li><!-- 3〜5個 --></ul>
     </div>
     <div class="panel is-good">
       <div class="panel-head">😊 良い側の名前</div>
@@ -138,7 +138,7 @@
     <div class="step">
       <div class="badge">1</div>
       <h3>手順名（12字以内）</h3>
-      <p>説明。60字以内。</p>
+      <p>説明。52字以内。</p>
       <div class="note">補足ラベル（任意・15字以内）</div>
     </div>
   </div>
@@ -155,7 +155,7 @@
     <div class="stat">
       <div class="label">指標名（15字以内）</div>
       <div class="value">8.4<span class="unit">倍</span></div>
-      <div class="desc">補足。40字以内。</div>
+      <div class="desc">補足。35字以内。</div>
     </div>
   </div>
   ...brand/pageno...
@@ -168,7 +168,7 @@
 <div class="slide">
   <div class="quote-wrap">
     <div class="quote-mark">“</div>
-    <p class="quote-text">引用文やキーメッセージ。<em>強調</em>可。60字以内。</p>
+    <p class="quote-text">引用文やキーメッセージ。<em>強調</em>可。55字以内。</p>
     <div class="quote-who">出典・発言者（任意）</div>
   </div>
   ...brand/pageno...
@@ -183,7 +183,7 @@
   <div class="media-grid">
     <div class="media-copy">
       <h3>小見出し（20字以内）</h3>
-      <p>本文段落（任意・90字以内）</p>
+      <p>本文段落（任意・80字以内）</p>
       <ul><li>箇条書き（任意・3個まで）</li></ul>
     </div>
     <div class="media-box">
@@ -257,7 +257,7 @@
     <div class="story">
       <div class="kicker">英語キッカー ── 期間など</div>
       <h2>見出し2行、<br><em>強調語</em>入り。</h2>
-      <p class="body">語り。80字以内。</p>
+      <p class="body">語り。70字以内。</p>
       <div class="note">出典・注記（25字以内）</div>
     </div>
     <div class="viz">
@@ -307,7 +307,7 @@
       <div class="tl-node is-now">  <!-- is-now は現在地1つだけ（任意） -->
         <div class="when">DAY 0-14</div><div class="dot"></div>
         <h3>節目名（8字以内）</h3>
-        <p>説明。40字以内。</p>
+        <p>説明。35字以内。</p>
       </div>
       <!-- --cols と同数 -->
     </div>
@@ -345,7 +345,7 @@
     <div class="mx-axis left">横軸 左</div>
     <div class="mx-axis right">横軸 右</div>
     <div class="mx-grid">
-      <div class="mx-cell"><h3>象限名</h3><p>説明。30字以内。</p></div>
+      <div class="mx-cell"><h3>象限名</h3><p>説明。26字以内。</p></div>
       <div class="mx-cell is-hero"><h3>★ 推し象限</h3><p>説明。</p></div>  <!-- is-hero は1つだけ -->
       <div class="mx-cell"><h3>象限名</h3><p>説明。</p></div>
       <div class="mx-cell"><h3>象限名</h3><p>説明。</p></div>
@@ -453,6 +453,29 @@ AI生成写真（scripts/genimg.mjs）または手持ち写真を全面に。写
 </div>
 ```
 
+## ★ tone-dark — 暗面バリアント（明暗リズムの道具）
+
+quote / kinetic / stats は、ルートを `<div class="slide on-cover tone-dark">` にすると
+**カバー配色の暗面**になる。白面カード系が続いたら中盤に挟んで、デッキのリズムを作る。
+
+```html
+<!-- 暗面 quote -->
+<div class="slide on-cover tone-dark">
+  <div class="deco layer-texture"></div>
+  <div class="quote-wrap">…（quote と同じ構造）…</div>
+  ...brand/pageno...
+</div>
+
+<!-- 暗面 kinetic -->
+<div class="slide on-cover tone-dark">
+  <div class="deco layer-texture"></div>
+  <div class="kinetic">…（kinetic と同じ構造）…</div>
+  ...brand/pageno...
+</div>
+```
+- `on-cover` を必ずセットで付ける（brand / pageno / テクスチャ / ghost が暗面色に切り替わる）
+- 使用箇所の目安: 10枚超のデッキで1〜2枚。表紙・章扉・締めの暗面と合わせて「明→暗→明」を設計する
+
 ## 20. kinetic — 斜め文字ステートメント（雑誌風）
 
 一番強いメッセージを1枚使って叫ぶ。デッキ中盤の「間」や章の締めに。
@@ -511,3 +534,7 @@ AI生成写真（scripts/genimg.mjs）または手持ち写真を全面に。写
 3. **レイヤーを効かせる**: layer-texture はほぼ全枚、ghost は主役数字のある枚に。annot は1デッキ1〜2回まで
 4. **ジャンプ率**: 1枚の主役は1つ。主役を巨大に、脇役は明確に小さく
 5. **強調語 `<em>`**: 見出しに1〜2箇所。afterの見本は `_labs/pro-demo/`
+6. **明暗リズム**: 白面カード系レイアウトを4枚以上連続させない。10枚超のデッキは
+   中盤に暗面（tone-dark の quote / kinetic、または section）を1〜2枚挟む
+7. **余白を放置しない**: コンテンツゾーンの下1/3が空くスライドは失敗。
+   文章を足す・行を増やす・レイアウトを変える・2枚を1枚に統合する、のいずれかで埋める

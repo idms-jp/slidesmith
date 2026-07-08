@@ -37,7 +37,19 @@ html, body { width: 1920px; height: 1080px; }
   --cover-bg: var(--ink);
   --cover-ink: var(--bg);
   --cover-muted: color-mix(in srgb, var(--bg) 62%, var(--ink));
+  /* 本文色: --ink-2 より一段濃い（「薄くて読みにくい」対策。テーマ側で上書き可） */
+  --ink-body: color-mix(in srgb, var(--ink-2) 72%, var(--ink));
 }
+
+/* ---------------------------------------------------------------------
+   日本語の改行制御（泣き別れ＝1〜2文字だけの行を構造的に防ぐ）
+   - 見出し系: 文節単位で折り返し（BudouX）＋行長のバランス調整
+   - 本文系: 最終行が極端に短くならないよう調整
+   --------------------------------------------------------------------- */
+h1, h2, h3, .k-line, .band, .quote-text, .closing-title, .cover-title {
+  text-wrap: balance; word-break: auto-phrase;
+}
+p, li, .lead, .desc, .cover-sub, .closing-sub { text-wrap: pretty; }
 
 /* ---------------------------------------------------------------------
    共通チューム: ブランド名 / ページ番号 / 見出しブロック
@@ -71,10 +83,10 @@ html, body { width: 1920px; height: 1080px; }
 .head .kicker::before { content: ""; width: 40px; height: var(--kicker-bar, 3px); background: var(--accent); }
 .head h2 {
   font-family: var(--font-display);
-  font-size: 64px; font-weight: 700; line-height: 1.3; color: var(--ink);
+  font-size: 68px; font-weight: 700; line-height: 1.3; color: var(--ink);
 }
 .head h2 em { font-style: normal; color: var(--accent); }
-.head .lead { font-size: 29px; line-height: 1.65; color: var(--ink-2); margin-top: 20px; max-width: 1440px; }
+.head .lead { font-size: 32px; line-height: 1.65; color: var(--ink-body); margin-top: 20px; max-width: 1440px; }
 
 /* =====================================================================
    1. cover — 表紙
@@ -97,7 +109,7 @@ html, body { width: 1920px; height: 1080px; }
 }
 .cover-title em { font-style: normal; color: var(--accent); }
 .cover-rule { width: 96px; height: 6px; background: var(--accent-2, var(--accent)); margin: 44px 0 38px; border-radius: 3px; }
-.cover-sub { font-size: 32px; line-height: 1.65; color: var(--cover-muted); max-width: 1120px; }
+.cover-sub { font-size: 34px; line-height: 1.65; color: var(--cover-muted); max-width: 1120px; }
 
 /* =====================================================================
    2. agenda — 目次
@@ -120,8 +132,8 @@ html, body { width: 1920px; height: 1080px; }
   font-size: 40px; font-weight: 800; color: var(--accent);
   font-variant-numeric: tabular-nums; flex: none;
 }
-.agenda li .t { font-size: 33px; font-weight: 700; line-height: 1.4; }
-.agenda li .d { font-size: 24px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.agenda li .t { font-size: 35px; font-weight: 700; line-height: 1.4; }
+.agenda li .d { font-size: 26px; color: var(--ink-body); margin-top: 6px; line-height: 1.5; }
 
 /* =====================================================================
    3. section — 章扉
@@ -143,13 +155,13 @@ html, body { width: 1920px; height: 1080px; }
   font-family: var(--font-display);
   font-size: 84px; font-weight: 800; line-height: 1.25;
 }
-.section-sub { font-size: 30px; line-height: 1.65; color: var(--cover-muted); margin-top: 32px; max-width: 1060px; }
+.section-sub { font-size: 32px; line-height: 1.65; color: var(--cover-muted); margin-top: 32px; max-width: 1060px; }
 
 /* =====================================================================
    4. cards — カード並列（2〜4枚。--cols で指定）
    ===================================================================== */
 .cards {
-  position: absolute; left: var(--pad-x); right: var(--pad-x); top: 430px; bottom: 150px;
+  position: absolute; left: var(--pad-x); right: var(--pad-x); top: 420px; bottom: 150px;
   display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 40px;
 }
 .card {
@@ -167,10 +179,10 @@ html, body { width: 1920px; height: 1080px; }
 .card .badge.icon { font-size: 34px; }
 .card h3 {
   font-family: var(--font-display);
-  font-size: 37px; font-weight: 700; line-height: 1.35; margin-bottom: 20px;
+  font-size: 40px; font-weight: 700; line-height: 1.35; margin-bottom: 20px;
 }
-.card p { font-size: 26px; line-height: 1.7; color: var(--ink-2); }
-.card .foot { position: absolute; left: 44px; bottom: 36px; font-size: 23px; font-weight: 700; color: var(--accent); }
+.card p { font-size: 30px; line-height: 1.7; color: var(--ink-body); }
+.card .foot { position: absolute; left: 44px; bottom: 36px; font-size: 25px; font-weight: 700; color: var(--accent); }
 
 /* =====================================================================
    5. list — 縦リスト（3〜4行）
@@ -191,14 +203,14 @@ html, body { width: 1920px; height: 1080px; }
   background: var(--accent); color: var(--on-accent, #fff);
   font-family: var(--font-display); font-size: 36px; font-weight: 800;
 }
-.vlist h3 { font-family: var(--font-display); font-size: 35px; font-weight: 700; line-height: 1.4; }
-.vlist p { font-size: 26px; line-height: 1.65; color: var(--ink-2); }
+.vlist h3 { font-family: var(--font-display); font-size: 38px; font-weight: 700; line-height: 1.4; }
+.vlist p { font-size: 30px; line-height: 1.65; color: var(--ink-body); }
 
 /* =====================================================================
    6. compare — 対比（BEFORE/AFTER・A/B）
    ===================================================================== */
 .compare {
-  position: absolute; left: var(--pad-x); right: var(--pad-x); top: 400px; bottom: 150px;
+  position: absolute; left: var(--pad-x); right: var(--pad-x); top: 390px; bottom: 150px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
 }
 .panel {
@@ -209,12 +221,15 @@ html, body { width: 1920px; height: 1080px; }
 }
 .panel .panel-head {
   padding: 26px 44px; font-family: var(--font-display);
-  font-size: 31px; font-weight: 800; letter-spacing: 0.06em;
+  font-size: 33px; font-weight: 800; letter-spacing: 0.06em;
   background: var(--ink-2); color: var(--bg);
 }
 .panel.is-good .panel-head { background: var(--accent); color: var(--on-accent, #fff); }
-.panel ul { list-style: none; padding: 40px 44px; display: flex; flex-direction: column; gap: 26px; }
-.panel li { font-size: 27px; line-height: 1.6; color: var(--ink-2); display: flex; gap: 18px; }
+.panel ul {
+  list-style: none; padding: 44px 48px; display: flex; flex-direction: column; gap: 32px;
+  flex: 1; justify-content: center;
+}
+.panel li { font-size: 31px; line-height: 1.6; color: var(--ink-body); display: flex; gap: 18px; }
 .panel li::before { content: "×"; font-weight: 800; color: var(--muted); flex: none; }
 .panel.is-good li::before { content: "✓"; color: var(--accent); }
 .vs {
@@ -230,7 +245,7 @@ html, body { width: 1920px; height: 1080px; }
    7. steps — 手順・プロセス（3〜4段）
    ===================================================================== */
 .steps {
-  position: absolute; left: var(--pad-x); right: var(--pad-x); top: 440px;
+  position: absolute; left: var(--pad-x); right: var(--pad-x); top: 430px;
   display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 88px;
 }
 .step { position: relative; }
@@ -245,9 +260,9 @@ html, body { width: 1920px; height: 1080px; }
   font-family: var(--font-display); font-size: 36px; font-weight: 800;
   margin-bottom: 34px;
 }
-.step h3 { font-family: var(--font-display); font-size: 36px; font-weight: 700; margin-bottom: 18px; line-height: 1.4; }
-.step p { font-size: 26px; line-height: 1.7; color: var(--ink-2); }
-.step .note { margin-top: 18px; font-size: 23px; font-weight: 700; color: var(--accent); }
+.step h3 { font-family: var(--font-display); font-size: 38px; font-weight: 700; margin-bottom: 18px; line-height: 1.4; }
+.step p { font-size: 30px; line-height: 1.7; color: var(--ink-body); }
+.step .note { margin-top: 18px; font-size: 25px; font-weight: 700; color: var(--accent); }
 
 /* =====================================================================
    8. stats — 数字インパクト（2〜4個）
@@ -261,14 +276,14 @@ html, body { width: 1920px; height: 1080px; }
   box-shadow: var(--card-shadow);
   padding: 52px 48px; display: flex; flex-direction: column; justify-content: center;
 }
-.stat .label { font-size: 26px; font-weight: 700; color: var(--muted); margin-bottom: 22px; }
+.stat .label { font-size: 28px; font-weight: 700; color: var(--muted); margin-bottom: 22px; }
 .stat .value {
   font-family: var(--font-display);
   font-size: 110px; font-weight: 800; line-height: 1; color: var(--accent);
   font-variant-numeric: tabular-nums; letter-spacing: 0;
 }
 .stat .value .unit { font-size: 44px; font-weight: 800; margin-left: 8px; }
-.stat .desc { font-size: 25px; line-height: 1.6; color: var(--ink-2); margin-top: 24px; }
+.stat .desc { font-size: 28px; line-height: 1.6; color: var(--ink-body); margin-top: 24px; }
 
 /* =====================================================================
    9. quote — 引用・声
@@ -283,10 +298,10 @@ html, body { width: 1920px; height: 1080px; }
 }
 .quote-text {
   font-family: var(--font-display);
-  font-size: 58px; font-weight: 700; line-height: 1.55;
+  font-size: 62px; font-weight: 700; line-height: 1.55;
 }
 .quote-text em { font-style: normal; color: var(--accent); }
-.quote-who { margin-top: 52px; font-size: 28px; color: var(--muted); display: flex; align-items: center; gap: 20px; }
+.quote-who { margin-top: 52px; font-size: 29px; color: var(--muted); display: flex; align-items: center; gap: 20px; }
 .quote-who::before { content: ""; width: 56px; height: 2px; background: var(--muted); }
 
 /* =====================================================================
@@ -296,10 +311,10 @@ html, body { width: 1920px; height: 1080px; }
   position: absolute; left: var(--pad-x); right: var(--pad-x); top: 400px; bottom: 150px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
 }
-.media-copy h3 { font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1.45; margin-bottom: 30px; }
-.media-copy p { font-size: 28px; line-height: 1.8; color: var(--ink-2); }
+.media-copy h3 { font-family: var(--font-display); font-size: 46px; font-weight: 700; line-height: 1.45; margin-bottom: 30px; }
+.media-copy p { font-size: 30px; line-height: 1.8; color: var(--ink-body); }
 .media-copy ul { list-style: none; margin-top: 34px; display: flex; flex-direction: column; gap: 20px; }
-.media-copy li { font-size: 27px; line-height: 1.6; color: var(--ink-2); display: flex; gap: 16px; }
+.media-copy li { font-size: 29px; line-height: 1.6; color: var(--ink-body); display: flex; gap: 16px; }
 .media-copy li::before { content: "●"; font-size: 15px; line-height: 2.4; color: var(--accent); flex: none; }
 .media-box {
   height: 100%; max-height: 520px; border-radius: var(--radius);
@@ -313,17 +328,17 @@ html, body { width: 1920px; height: 1080px; }
 /* =====================================================================
    11. table — 表
    ===================================================================== */
-.tablewrap { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 410px; }
-table.simple { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 27px; }
-table.simple th, table.simple td { padding: 30px 40px; text-align: left; line-height: 1.5; }
+.tablewrap { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 390px; }
+table.simple { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 30px; }
+table.simple th, table.simple td { padding: 28px 40px; text-align: left; line-height: 1.5; }
 table.simple thead th {
-  font-family: var(--font-display); font-size: 26px; font-weight: 800; letter-spacing: 0.06em;
+  font-family: var(--font-display); font-size: 27px; font-weight: 800; letter-spacing: 0.06em;
   background: var(--ink); color: var(--bg);
 }
 table.simple thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
 table.simple thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
-table.simple tbody th { font-weight: 700; background: var(--bg-soft); width: 320px; }
-table.simple tbody td { color: var(--ink-2); background: var(--bg); }
+table.simple tbody th { font-weight: 700; background: var(--bg-soft); width: 380px; }
+table.simple tbody td { color: var(--ink-body); background: var(--bg); }
 table.simple tbody tr th, table.simple tbody tr td { border-bottom: 1px solid var(--line); }
 table.simple td.hot { color: var(--accent); font-weight: 800; }
 
@@ -344,7 +359,7 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   font-size: 84px; font-weight: 800; line-height: 1.35;
 }
 .closing-title em { font-style: normal; color: var(--accent); }
-.closing-sub { font-size: 31px; line-height: 1.7; color: var(--cover-muted); margin-top: 44px; }
+.closing-sub { font-size: 33px; line-height: 1.7; color: var(--cover-muted); margin-top: 44px; }
 .closing-cta {
   margin-top: 64px; padding: 28px 84px; border-radius: 999px;
   background: var(--accent); color: var(--on-accent, #fff);
@@ -414,7 +429,7 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   font-size: 76px; line-height: 1.24; color: var(--ink); margin-top: 30px;
 }
 .story h2 em { font-style: normal; color: var(--accent); }
-.story .body { font-size: 28px; line-height: 1.75; color: var(--ink-2); margin-top: 34px; max-width: 560px; }
+.story .body { font-size: 31px; line-height: 1.75; color: var(--ink-body); margin-top: 34px; max-width: 585px; }
 .story .note {
   display: inline-flex; align-items: center; gap: 14px;
   margin-top: 40px; padding: 16px 28px;
@@ -505,8 +520,8 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   box-shadow: 0 0 0 4px var(--accent);
 }
 .tl-node.is-now .dot { background: var(--accent-2, var(--accent)); box-shadow: 0 0 0 4px var(--accent-2, var(--accent)); }
-.tl-node h3 { font-family: var(--font-display); font-size: 33px; font-weight: 800; line-height: 1.4; margin-bottom: 14px; }
-.tl-node p { font-size: 24px; line-height: 1.65; color: var(--ink-2); }
+.tl-node h3 { font-family: var(--font-display); font-size: 35px; font-weight: 800; line-height: 1.4; margin-bottom: 14px; }
+.tl-node p { font-size: 27px; line-height: 1.65; color: var(--ink-body); }
 
 /* =====================================================================
    15. funnel — ファネル / 絞り込み（3〜4段）
@@ -528,7 +543,7 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 .fu-row:nth-child(2) .fu-bar { width: 76%; background: color-mix(in srgb, var(--accent) 38%, var(--bg-soft)); }
 .fu-row:nth-child(3) .fu-bar { width: 54%; background: color-mix(in srgb, var(--accent) 62%, var(--bg-soft)); }
 .fu-row:nth-child(4) .fu-bar { width: 36%; background: var(--accent); }
-.fu-bar .t { font-family: var(--font-display); font-size: 29px; font-weight: 800; color: var(--ink); }
+.fu-bar .t { font-family: var(--font-display); font-size: 31px; font-weight: 800; color: var(--ink); }
 .fu-bar .v { font-family: var(--font-display); font-size: 40px; font-weight: 900; color: var(--ink); font-variant-numeric: tabular-nums; }
 .fu-row:nth-child(3) .fu-bar .t, .fu-row:nth-child(3) .fu-bar .v,
 .fu-row:nth-child(4) .fu-bar .t, .fu-row:nth-child(4) .fu-bar .v { color: var(--on-accent, #fff); }
@@ -553,8 +568,8 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   box-shadow: var(--card-shadow);
   padding: 34px 40px; display: flex; flex-direction: column; justify-content: center;
 }
-.mx-cell h3 { font-family: var(--font-display); font-size: 31px; font-weight: 800; margin-bottom: 12px; }
-.mx-cell p { font-size: 23px; line-height: 1.6; color: var(--ink-2); }
+.mx-cell h3 { font-family: var(--font-display); font-size: 33px; font-weight: 800; margin-bottom: 12px; }
+.mx-cell p { font-size: 26px; line-height: 1.6; color: var(--ink-body); }
 .mx-cell.is-hero {
   background: var(--accent); border-color: var(--accent);
 }
@@ -631,7 +646,7 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 .band.alt  { background: #fff; color: #16181F; }
 .band.dark { background: #16181F; color: #fff; }
 .photo-sub {
-  margin-top: 42px; font-size: 29px; line-height: 1.7;
+  margin-top: 42px; font-size: 31px; line-height: 1.7;
   color: rgba(255, 255, 255, 0.92); max-width: 960px;
   text-shadow: 0 2px 14px rgba(6, 8, 14, 0.5);
 }
@@ -685,7 +700,8 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 }
 .k-foot {
   position: absolute; left: 50%; transform: translateX(-50%); bottom: 130px;
-  font-size: 27px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em;
+  font-size: 29px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em;
+  width: max-content; max-width: 1620px;
 }
 
 /* =====================================================================
@@ -696,7 +712,7 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   display: flex; flex-direction: column; gap: 34px;
 }
 .bar-row { display: grid; grid-template-columns: 340px 1fr 190px; align-items: center; gap: 36px; }
-.bar-row .k { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--ink-2); text-align: right; line-height: 1.4; }
+.bar-row .k { font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--ink-body); text-align: right; line-height: 1.4; }
 .bar-row .track { height: 64px; background: var(--bg-soft); border: var(--card-border); border-radius: 999px; overflow: hidden; }
 .bar-row .fill {
   height: 100%; width: var(--w, 50%); border-radius: 999px;
@@ -706,3 +722,33 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 .bar-row.is-hero .fill { background: var(--accent); }
 .bar-row .v { font-family: var(--font-display); font-size: 38px; font-weight: 900; color: var(--muted); font-variant-numeric: tabular-nums; }
 .bar-row.is-hero .v { color: var(--accent); font-size: 44px; }
+
+/* =====================================================================
+   ★ tone-dark — 明暗リズム用の暗面バリアント
+   使い方: <div class="slide on-cover tone-dark"> （on-cover とセットで付ける）
+   対応レイアウト: quote / kinetic / stats。デッキ中盤の「山場」に置いて
+   白面の連続（単調さ）を断ち切る。
+   ===================================================================== */
+.tone-dark { background: var(--cover-bg); color: var(--cover-ink); }
+/* quote */
+.tone-dark .quote-text { color: var(--cover-ink); }
+.tone-dark .quote-who { color: var(--cover-muted); }
+.tone-dark .quote-who::before { background: var(--cover-muted); }
+/* kinetic */
+.tone-dark .k-line { color: var(--cover-ink); }
+.tone-dark .k-line.k-outline { color: transparent; -webkit-text-stroke-color: var(--cover-ink); }
+.tone-dark .k-line.k-fill {
+  background: var(--cover-ink); color: var(--cover-bg);
+  box-shadow: 10px 14px 0 color-mix(in srgb, var(--cover-ink) 22%, transparent);
+}
+.tone-dark .k-line.k-accent { box-shadow: 10px 14px 0 color-mix(in srgb, var(--cover-ink) 22%, transparent); }
+.tone-dark .k-foot { color: var(--cover-muted); }
+/* stats（head 付きレイアウトの見出しも暗面色に） */
+.tone-dark .head h2 { color: var(--cover-ink); }
+.tone-dark .head .lead { color: var(--cover-muted); }
+.tone-dark .stat {
+  background: color-mix(in srgb, var(--cover-ink) 7%, var(--cover-bg));
+  border-color: color-mix(in srgb, var(--cover-ink) 18%, transparent);
+}
+.tone-dark .stat .label { color: var(--cover-muted); }
+.tone-dark .stat .desc { color: var(--cover-muted); }
