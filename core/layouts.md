@@ -167,13 +167,14 @@
 ```html
 <div class="slide">
   <div class="quote-wrap">
-    <div class="quote-mark">“</div>
+    <div class="quote-mark">“</div>  <!-- 実際の「引用・発言・お客様の声」のときだけ。キーメッセージなら削除 -->
     <p class="quote-text">引用文やキーメッセージ。<em>強調</em>可。55字以内。</p>
     <div class="quote-who">出典・発言者（任意）</div>
   </div>
   ...brand/pageno...
 </div>
 ```
+- 引用符（quote-mark）は**誰かの言葉を引用するときの記号**。自分のメッセージを言い切る枚では付けない
 
 ## 10. media — テキスト + ビジュアル枠
 
