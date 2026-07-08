@@ -299,10 +299,10 @@ p, li, .lead, .desc, .cover-sub, .closing-sub { text-wrap: pretty; }
 }
 .quote-text {
   font-family: var(--font-display);
-  font-size: 66px; font-weight: 700; line-height: 1.55; max-width: 1360px;
+  font-size: 80px; font-weight: 700; line-height: 1.5; max-width: 1460px;
 }
 .quote-text em { font-style: normal; color: var(--accent); }
-.quote-who { margin-top: 40px; font-size: 29px; color: var(--muted); display: flex; align-items: center; gap: 20px; }
+.quote-who { margin-top: 48px; font-size: 31px; color: var(--muted); display: flex; align-items: center; gap: 20px; }
 .quote-who::after { content: ""; width: 56px; height: 2px; background: var(--muted); }
 .quote-who::before { content: ""; width: 56px; height: 2px; background: var(--muted); }
 
@@ -691,7 +691,7 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   position: absolute; inset: 0; padding-bottom: 40px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.k-stack { transform: rotate(-6deg); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.k-stack { transform: rotate(-6deg); display: flex; flex-direction: column; align-items: flex-start; gap: 38px; }
 .k-line {
   font-family: var(--font-display); font-weight: 900; line-height: 1.06;
   font-size: 96px; letter-spacing: 0.01em; color: var(--ink);
