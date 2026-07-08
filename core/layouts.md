@@ -278,6 +278,8 @@
             <circle class="arc" cx="100" cy="100" r="84" stroke-dasharray="443 528"/>
           </svg>
           <div class="in">
+            <!-- 🚫 数値がリングに触れたら失敗。「8.4」など3字まではデフォルトでOK、
+                 「83.6」など4字以上＋単位は style="font-size:68px;" で縮小する -->
             <div class="n">8.4<small>倍</small></div>
             <div class="l">指標名（6字以内）</div>
           </div>
