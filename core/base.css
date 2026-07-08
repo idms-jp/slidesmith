@@ -289,20 +289,20 @@ p, li, .lead, .desc, .cover-sub, .closing-sub { text-wrap: pretty; }
    9. quote — 引用・声
    ===================================================================== */
 .quote-wrap {
-  position: absolute; inset: 0; padding: 0 240px;
+  position: absolute; inset: 0; padding: 0 240px 90px;  /* 下padding=光学的センター（真ん中よりやや上） */
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center;
 }
 .quote-mark {
   font-family: Georgia, serif; font-size: 190px; line-height: 0.55;
-  color: var(--accent); margin-bottom: 28px;
+  color: var(--accent); margin-bottom: 14px;
 }
 .quote-text {
   font-family: var(--font-display);
   font-size: 66px; font-weight: 700; line-height: 1.55; max-width: 1360px;
 }
 .quote-text em { font-style: normal; color: var(--accent); }
-.quote-who { margin-top: 48px; font-size: 29px; color: var(--muted); display: flex; align-items: center; gap: 20px; }
+.quote-who { margin-top: 40px; font-size: 29px; color: var(--muted); display: flex; align-items: center; gap: 20px; }
 .quote-who::after { content: ""; width: 56px; height: 2px; background: var(--muted); }
 .quote-who::before { content: ""; width: 56px; height: 2px; background: var(--muted); }
 
@@ -687,7 +687,10 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 /* =====================================================================
    20. kinetic — 斜め文字のステートメント（雑誌の見開き風）
    ===================================================================== */
-.kinetic { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.kinetic {
+  position: absolute; inset: 0; padding-bottom: 40px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
 .k-stack { transform: rotate(-6deg); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
 .k-line {
   font-family: var(--font-display); font-weight: 900; line-height: 1.06;
@@ -700,10 +703,11 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
   font-family: var(--font-display); font-size: 26px; font-weight: 800; letter-spacing: 0.18em;
   color: var(--accent); margin-bottom: 6px;
 }
+/* 補足の一文: .kinetic の中（.k-stack の直後）に置き、文字群とひとつの塊にする */
 .k-foot {
-  position: absolute; left: 50%; transform: translateX(-50%); bottom: 130px;
+  margin-top: 88px;
   font-size: 29px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em;
-  width: max-content; max-width: 1620px;
+  width: max-content; max-width: 1620px; text-align: center;
 }
 
 /* =====================================================================

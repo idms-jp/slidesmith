@@ -499,8 +499,8 @@ quote / kinetic / stats は、ルートを `<div class="slide on-cover tone-dark
       <div class="k-line k-fill" style="font-size:108px; margin-left:70px;">塗り帯の行。</div>
       <div class="k-line k-accent" style="font-size:88px; margin-left:170px;">アクセント帯の行。</div>
     </div>
+    <div class="k-foot">── 補足の一文（任意）</div>  <!-- 必ず .kinetic の中に置く（文字群と一塊にする） -->
   </div>
-  <div class="k-foot">── 補足の一文（任意）</div>
   ...brand/pageno...
 </div>
 ```
