@@ -730,6 +730,50 @@ table.simple td.hot { color: var(--accent); font-weight: 800; }
 .bar-row.is-hero .v { color: var(--accent); font-size: 44px; }
 
 /* =====================================================================
+   ★ video-safe — 撮影用モード（左下ワイプ＋下部テロップ前提）
+   使い方: 全スライドのルートに付与 <div class="slide video-safe ...">
+   ・下部300pxを「完全な空きストリップ」にする。ワイプ（直径〜280px）も
+     テロップ帯もこのストリップ内に収まる想定（スライド内容とは一切重ならない）
+   ・brand は非表示（ワイプで隠れる位置のため）。ghost等の装飾も下部に置かない
+   ・pageno は右上へ移動（台本との同期用に残す）
+   ・レイアウト上の注意: funnel は3段まで / table は4行まで
+   ===================================================================== */
+.video-safe .brand { display: none; }
+.video-safe .pageno { bottom: auto; top: 54px; }
+.video-safe .head { top: 72px; }
+.video-safe .cards { top: 370px; bottom: 300px; }
+.video-safe .card { padding: 40px 44px; }
+.video-safe .vlist { top: 340px; gap: 22px; }
+.video-safe .vlist li { min-height: 118px; padding: 24px 48px; }
+.video-safe .compare { top: 340px; bottom: 300px; }
+.video-safe .panel ul { padding: 28px 48px; gap: 24px; }
+.video-safe .vs { top: 40%; }
+.video-safe .steps { top: 370px; }
+.video-safe .step .badge { margin-bottom: 26px; }
+.video-safe .stats { top: 370px; bottom: 300px; }
+.video-safe .tablewrap { top: 330px; }
+.video-safe table.simple th, .video-safe table.simple td { padding: 20px 40px; }
+.video-safe .hero-grid { top: 80px; bottom: 300px; }
+.video-safe .sub-stats { margin-top: 28px; }
+.video-safe .timeline { top: 390px; }
+.video-safe .funnel { top: 360px; }
+.video-safe .fu-bar { height: 104px; }
+.video-safe .matrix { top: 340px; height: 430px; }
+.video-safe .mx-cell { padding: 24px 36px; }
+.video-safe .bars { top: 370px; gap: 28px; }
+.video-safe .quote-wrap { padding-bottom: 320px; }
+.video-safe .kinetic { padding-bottom: 280px; }
+.video-safe .k-foot { margin-top: 64px; }
+.video-safe .closing-wrap { padding-bottom: 260px; }
+.video-safe .cover-body { top: 260px; }
+.video-safe .cover-meta { top: 100px; }
+.video-safe .section-body { top: 330px; }
+.video-safe .breakout-grid { bottom: 300px; }
+.video-safe .photo-body { bottom: 320px; }
+.video-safe .agenda { top: 330px; gap: 26px 64px; }
+.video-safe .agenda li { min-height: 104px; padding: 26px 40px; }
+
+/* =====================================================================
    ★ tone-dark — 明暗リズム用の暗面バリアント
    使い方: <div class="slide on-cover tone-dark"> （on-cover とセットで付ける）
    対応レイアウト: quote / kinetic / stats。デッキ中盤の「山場」に置いて

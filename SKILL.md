@@ -120,6 +120,14 @@ node scripts/genimg.mjs "<日本語で場面を描写>" decks/<案件>/assets/co
 ### 立体感・斜め文字
 `.depth-1/2` `.tilt-l/r` `.polaroid`、photo-hero（斜め帯タイトル）、breakout（円から飛び出す）、kinetic（斜め文字ステートメント）— layouts.md Phase 3セクション参照
 
+## 撮影用モード（動画のワイプ＋テロップ前提）
+話し手のワイプ（左下）と字幕テロップ（下部）を載せる動画用スライドは、
+全スライドのルートに **`video-safe`** を付ける: `<div class="slide video-safe ...">`
+- 下部300pxが完全な空きストリップになる（ワイプ直径〜280px＋テロップ帯がここに収まる）
+- brand は自動非表示・pageno は右上へ移動
+- 制約: funnel は3段まで / table は4行まで / ghost 等の装飾を下部に置かない
+- 文字量は通常より1割厳しめに（コンテンツゾーンが縮むため。QCで検出されたら削る）
+
 ## 別サイズ（SNS正方形・縦型）
 基本は16:9固定。他サイズが必要なら `.slide` の width/height と render.mjs の viewport を
 複製・調整した派生ファイルを作る（安易にbase.cssを直接書き換えない）。
